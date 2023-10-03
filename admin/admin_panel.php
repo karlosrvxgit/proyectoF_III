@@ -7,7 +7,7 @@ if ($_SESSION['user_rol'] !== 'admin') {
     exit;
 }
 
-// Resto del código de la página de administrador
+
 ?>
 <!DOCTYPE html>
 <html>

@@ -1,8 +1,8 @@
 <?php
 // Datos de conexión a la base de datos
-$host = "localhost"; // Cambia esto si tu base de datos está en un servidor diferente
-$username = "root"; // Cambia esto por tu nombre de usuario de MySQL
-$password = ""; // Cambia esto por tu contraseña de MySQL
+$host = "localhost"; 
+$username = "root"; 
+$password = ""; 
 $dbname = "uni";
 
 try {

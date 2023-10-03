@@ -47,7 +47,7 @@ try {
             $_SESSION['user_name'] = $row['name'];
             $_SESSION['user_email'] = $row['email'];
 
-            // Redirige al usuario a la página de información personal (edit.php en este caso)
+            // Redirige al usuario a la página de información personal 
             header('Location: /login/login_start.php');
             // header('Location: /edit/edit.php');
             exit();

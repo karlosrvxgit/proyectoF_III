@@ -19,7 +19,7 @@ $stmt = $pdo->prepare("SELECT c.nombre AS clase_nombre FROM clases c
 $stmt->execute([$alumno_id]);
 $clases = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Resto del código de la página de alumno
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,7 +43,7 @@ $clases = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     ?>
 
-    <!-- Otras funcionalidades para el alumno -->
+    
     <!-- Formulario para cambiar las clases -->
 <h2>Cambiar Clases</h2>
 <form action="cambiar_clases.php" method="POST">

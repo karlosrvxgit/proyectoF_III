@@ -11,9 +11,9 @@
     <?php
     session_start();
 
-    // Verificar si el usuario está autenticado (es decir, si hay una sesión activa)
+    // Verificar si el usuario está autenticado
     if (isset($_SESSION['user_id'])) {
-        // El usuario está autenticado, puedes continuar mostrando los datos del perfil
+       
 
         // Recupera los datos de la sesión
         $user_id = $_SESSION['user_id'];

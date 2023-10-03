@@ -1,5 +1,5 @@
 <?php
-//borrar_maestros.php
+
 require_once('config.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $stmt = $pdo->prepare("DELETE FROM clases WHERE id = ?");
     $stmt->execute([$clase_id]);
 
-    // Redirigir de vuelta a la página de listar_maestros.php o cualquier otra página necesaria
+    // Redirigir de vuelta a la página de listar_maestros.php
     header('Location: listar_clases.php');
     exit;
 }

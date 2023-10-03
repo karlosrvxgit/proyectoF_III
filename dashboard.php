@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $rol = $_SESSION['user_rol'];
 
 if ($rol === 'admin') {
-    // Aquí puedes mostrar las funciones de administrador
+   
     // CRUD de maestros
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['crear_maestro'])) {
@@ -41,7 +41,7 @@ $maestros = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($maestros as $maestro) {
     echo "ID: " . $maestro['id'] . " | Nombre: " . $maestro['nombre'] . " | <a href='editar_maestro.php?id=" . $maestro['id'] . "'>Editar</a> | <a href='eliminar_maestro.php?id=" . $maestro['id'] . "'>Eliminar</a><br>";
 }
-    // CRUD de alumnos (similar al CRUD de maestros)
+    // CRUD de alumnos 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['crear_alumno'])) {
         $nombre_alumno = $_POST['nombre_alumno'];
@@ -62,15 +62,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Mostrar la lista de alumnos (similar a la lista de maestros)
-
-
-
-// CRUD de clases (similar al CRUD de maestros y alumnos)
-
-
-// Para relacionar un maestro a un curso, puedes tener una tabla de relaciones
-// Ejemplo de una tabla de relaciones "maestros_cursos" con campos (id, id_maestro, id_curso)
 
 // Para agregar una relación entre un maestro y un curso
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['relacionar_maestro_curso'])) {
@@ -85,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['relacionar_maestro_cur
 
     // CRUD de maestros, alumnos, clases, relaciones, cambio de rol, etc.
 } elseif ($rol === 'maestro') {
-    // Aquí puedes mostrar las funciones de maestro
+  
     // Obtener la ID del maestro desde la sesión
 $maestro_id = $_SESSION['user_id'];
 
@@ -126,7 +117,7 @@ if ($alumnos) {
 
     // Ver la clase asignada y los datos de sus alumnos
 } elseif ($rol === 'alumno') {
-    // Aquí puedes mostrar las funciones de alumno
+ 
     // Obtener la ID del alumno desde la sesión
 $alumno_id = $_SESSION['user_id'];
 
@@ -149,7 +140,7 @@ if ($clases) {
 // Obtener la ID del alumno desde la sesión
 $alumno_id = $_SESSION['user_id'];
 
-// Consultar todas las clases disponibles (por ejemplo, desde una tabla "clases")
+// Consultar todas las clases disponibles
 $stmt = $pdo->prepare("SELECT id, nombre FROM clases");
 $stmt->execute();
 $clases_disponibles = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -168,10 +159,6 @@ if ($clases_disponibles) {
     echo "No hay clases disponibles en este momento.";
 }
 
-
-    // Ver y cambiar las clases en las que está registrado
-
-    // cambiar_clases.php
 
 // Obtener la ID del alumno desde la sesión
 $alumno_id = $_SESSION['user_id'];

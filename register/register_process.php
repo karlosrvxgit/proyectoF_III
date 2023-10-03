@@ -14,7 +14,7 @@ if (
     $username = $_POST['username'];
     $password = $_POST['contrasena'];
 
-    // Hash de la contraseña (asegúrate de usar un método de hash seguro en producción)
+    // Hash de la contraseña 
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     try {
