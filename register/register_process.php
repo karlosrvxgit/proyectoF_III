@@ -5,13 +5,13 @@ session_start();
 if (
     isset($_POST['name']) &&
     isset($_POST['rol']) &&
-    isset($_POST['username']) &&
+    isset($_POST['correo']) &&
     isset($_POST['contrasena'])
 ) {
     // Recupera los datos del formulario
     $name = $_POST['name'];
     $rol = $_POST['rol'];
-    $username = $_POST['username'];
+    $correo = $_POST['correo'];
     $password = $_POST['contrasena'];
 
     // Hash de la contraseña 
@@ -19,11 +19,11 @@ if (
 
     try {
         $hostname = "localhost";
-        $usern = "root";
+        $username = "root";
         $password = "";
         $dbname = "uni";
     
-        $mysqli = new mysqli($hostname, $usern, $password, $dbname);
+        $mysqli = new mysqli($hostname, $username, $password, $dbname);
         
         // Verifica la conexión
         if ($mysqli->connect_error) {
@@ -31,18 +31,18 @@ if (
         }
 
         // Consulta SQL para insertar un nuevo usuario
-        $query = "INSERT INTO usuarios (nombre, rol, username, contrasena) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO usuario (nombre, rol, correo, contrasena ) VALUES (?, ?, ?, ?)";
         $stmt = $mysqli->prepare($query);
-        $stmt->bind_param('ssss', $name, $rol, $username, $hashed_password);
+        $stmt->bind_param('ssss', $name, $rol, $correo, $hashed_password);
 
         if ($stmt->execute()) {
             // Registro exitoso, establece las variables de sesión
             $_SESSION['user_id'] = $mysqli->insert_id;
             $_SESSION['user_name'] = $name;
-            $_SESSION['user_email'] = $username;
+            $_SESSION['user_email'] = $email;
 
             // Redirige al usuario a la página de inicio de sesión
-            header('Location: /login/login.php');
+            header('Location: ../login/login.php');
             exit();
         } else {
             // Error al registrar al usuario, muestra un mensaje de error

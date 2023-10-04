@@ -1,74 +1,48 @@
 <?php
 session_start();
 
-// Verifica si se enviaron datos de inicio de sesión
-if (isset($_POST['email']) && isset($_POST['password'])) {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Recupera los datos del formulario
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $contrasena = $_POST['contrasena'];
+    $rol = $_POST['rol'];
 
-    // Conecta a la base de datos 
-   
-    
-    
-try {
-    $hostname = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "login_db";
+    require_once($_SERVER["DOCUMENT_ROOT"] . "../config/database.php");
 
-    $mysqli = new mysqli($hostname, $username, $password, $dbname);
+    try {
+        // Verifica los valores recibidos (solo para depuración)
+        echo "contrasena: $contrasena, Rol: $rol";
 
-} catch (\mysqli_sql_exception $e) {
-    echo "Error: " . $e->getMessage();
-}
-    
+        $query = "SELECT id, nombre, rol, username, contrasena FROM usuarios WHERE username = :username AND rol = :rol";
+        
+        $stmt = $pdo->prepare($query);
+        $stmt->bindParam(':username', $email);
+        $stmt->bindParam(':rol', $rol);
+        $stmt->execute();
 
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Consulta SQL para verificar las credenciales del usuario
-    $query = "SELECT id, name, email, password FROM users WHERE email = ?";
-    $stmt = $mysqli->prepare($query);
-    // $stmt = $db->prepare($query);
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        if ($user && password_verify($password, $user['contrasena'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_username'] = $user['username'];
+            $_SESSION['user_rol'] = $user['rol'];
 
-    if ($result->num_rows === 1) {
-        // El usuario existe en la base de datos
-        $row = $result->fetch_assoc();
-        $hashed_password = $row['password'];
-        $password =$hashed_password;
-
-        // Verifica la contraseña
-        if ($password === $hashed_password) {
-        // if (password_verify($password, $hashed_password)) {
-            // Inicio de sesión exitoso, establece las variables de sesión
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['user_name'] = $row['name'];
-            $_SESSION['user_email'] = $row['email'];
-
-            // Redirige al usuario a la página de información personal 
-            header('Location: /login/login_start.php');
-            // header('Location: /edit/edit.php');
-            exit();
+            // Redirige al usuario a la página correspondiente según el rol
+            if ($user['rol'] === 'admin') {
+                header('Location: admin_panel.php');
+            } elseif ($user['rol'] === 'maestro') {
+                header('Location: maestro_panel.php');
+            } elseif ($user['rol'] === 'alumno') {
+                header('Location: alumno_panel.php');
+            }
+            exit;
         } else {
-            // Contraseña incorrecta, muestra un mensaje de error
-            echo "Contraseña incorrecta. <a href='/login/login.php'>Volver a intentar</a>";
+            echo 'Credenciales incorrectas. <a href="/login/login.php">Volver a intentar</a>';
         }
-    } else {
-        // El usuario no existe, muestra un mensaje de error
-        echo "No se encontró un usuario con ese email. <a href='/login/login.php'>Volver a intentar</a>";
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
-
-    // Cierra la conexión a la base de datos
-    $stmt->close();
-    $mysqli->close();
-    // $db->close();
 } else {
-    // Si no se enviaron datos de inicio de sesión, muestra un mensaje de error
     echo "Se requieren datos de inicio de sesión. <a href='/login/login.php'>Volver a intentar</a>";
 }
 ?>
-
-
-

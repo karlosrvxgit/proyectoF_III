@@ -17,8 +17,8 @@
         <label for="rol">Rol:</label>
         <input type="rol" name="rol" required><br>
 
-        <label for="username">Username:</label>
-        <input type="username" name="username" required><br>
+        <label for="correo">Correo:</label>
+        <input type="email" name="correo" required><br>
 
 
         <label for="contrasena">Contraseña:</label>
