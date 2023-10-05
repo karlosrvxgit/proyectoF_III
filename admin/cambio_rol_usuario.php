@@ -2,12 +2,12 @@
 session_start();
 
 // Verificar si el usuario tiene el rol de administrador
-if ($_SESSION['user_rol'] !== 'admin') {
+if($_SESSION["user_data"]["role_id"] !== 3) {
     header('Location: acceso_denegado.php');
     exit;
 }
 
-require_once('config.php'); // Configuración de la base de datos
+require_once('../config/database.php'); // Configuración de la base de datos
 
 // Procesar el formulario cuando se envía
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nuevo_rol = $_POST['nuevo_rol'];
 
     // Actualizar el rol del usuario en la base de datos
-    $stmt = $pdo->prepare("UPDATE usuarios SET rol = ? WHERE id = ?");
+    $stmt = $pdo->prepare("UPDATE usuario SET rol = ? WHERE id = ?");
     $stmt->execute([$nuevo_rol, $usuario_id]);
 
     echo "Rol del usuario actualizado correctamente.";

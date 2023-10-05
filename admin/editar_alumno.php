@@ -1,6 +1,6 @@
 <?php
 
-require_once('config.php');
+require_once('../config/database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $alumno_id = $_GET['id'];

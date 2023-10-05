@@ -2,12 +2,12 @@
 session_start();
 
 // Verificar si el usuario tiene el rol de administrador
-if ($_SESSION['user_rol'] !== 'admin') {
+if($_SESSION["user_data"]["role_id"] !== 3) {
     header('Location: acceso_denegado.php');
     exit;
 }
 
-require_once('config.php'); // Configuración de la base de datos
+require_once('../config/database.php'); // Configuración de la base de datos
 
 // Obtener la lista de alumnos desde la base de datos
 $stmt = $pdo->prepare("SELECT id, nombre, apellidos, clases_registradas FROM alumnos");
@@ -41,6 +41,7 @@ $alumnos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $alumno['apellidos']; ?></td>
                     <td><?php echo $alumno['clases_registradas']; ?></td>
                     <td><a href="editar_alumno.php?id=<?php echo $alumno['id']; ?>">Editar</a></td>
+                    <td><a href="borrar_alumno.php?id=<?php echo $alumno['id']; ?>">Eliminar</a></td>
                 </tr>
             <?php endforeach; ?>
         </table>

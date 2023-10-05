@@ -2,32 +2,32 @@
 session_start();
 
 // Verificar si el usuario tiene el rol de administrador
-if ($_SESSION['user_rol'] !== 'admin') {
+if($_SESSION["user_data"]["role_id"] !== 3) {
     header('Location: acceso_denegado.php');
     exit;
 }
 
-require_once('config.php'); // Configuración de la base de datos
+require_once('../config/database.php'); // Configuración de la base de datos
 
 // Obtener la lista de clases desde la base de datos
-$stmt = $pdo->prepare("SELECT id, nombre FROM clases");
+$stmt = $pdo->prepare("SELECT materia_id, materia_nombre FROM materias");
 $stmt->execute();
-$clases = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$materias = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Listar Clases</title>
+    <title>Listar Materias</title>
 </head>
 
 <body>
-    <h1>Listar Clases</h1>
+    <h1>Listar Materias</h1>
 
     <!-- Mostrar la lista de clases -->
 
-    <?php if ($clases) : ?>
+    <?php if ($materias) : ?>
         <table border="1">
             <thead>
                 <tr>
@@ -39,17 +39,17 @@ $clases = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </thead>
 
             <tbody>
-                <?php foreach ($clases as $clase) : ?>
+                <?php foreach ($materias as $materia) : ?>
                     <tr>
-                        <td><?php echo $clase['nombre']; ?></td>
-                        <td><a href="editar_clase.php?id=<?php echo $clase['id']; ?>">Editar</a></td>
-                        <td><a href="borrar_clase.php?id=<?php echo $clase['id']; ?>">Eliminar</a></td>
+                        <td><?php echo $materia['materia_nombre']; ?></td>
+                        <td><a href="editar_materia.php?id=<?php echo $clase['id']; ?>">Editar</a></td>
+                        <td><a href="borrar_materia.php?id=<?php echo $clase['id']; ?>">Eliminar</a></td>
                     <?php endforeach ?>
                     </tr>
             </tbody>
         </table>
     <?php else : ?>
-        <p>No hay clases registradas.</p>
+        <p>No hay materias registradas.</p>
     <?php endif; ?>
 
     <br>

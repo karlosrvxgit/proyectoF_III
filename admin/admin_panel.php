@@ -1,14 +1,4 @@
-<?php
-session_start();
 
-// Verificar si el usuario tiene el rol de administrador
-if ($_SESSION['user_rol'] !== 'admin') {
-    header('Location: acceso_denegado.php');
-    exit;
-}
-
-
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,16 +9,16 @@ if ($_SESSION['user_rol'] !== 'admin') {
 
     <!-- Funcionalidades para el administrador -->
     <h2>Gestión de Maestros</h2>
-    <a href="crear_maestro.php">Crear Maestro</a>
-    <a href="listar_maestros.php">Listar Maestros</a>
+    <a href="/admin/crear_maestro.php">Crear Maestro</a>
+    <a href="/admin/listar_maestros.php">Listar Maestros</a>
 
     <h2>Gestión de Alumnos</h2>
     <a href="crear_alumno.php">Crear Alumno</a>
     <a href="listar_alumnos.php">Listar Alumnos</a>
 
-    <h2>Gestión de Clases</h2>
-    <a href="crear_clase.php">Crear Clase</a>
-    <a href="listar_clases.php">Listar Clases</a>
+    <h2>Gestión de Materias</h2>
+    <a href="/admin/crear_materia.php">Crear Materia</a>
+    <a href="/admin/listar_materias.php">Listar Materias</a>
 
     <h2>Relacionar Maestro y Clase</h2>
     <a href="relacionar_maestro_clase.php">Relacionar Maestro y Clase</a>

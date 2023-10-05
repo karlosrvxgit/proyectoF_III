@@ -1,6 +1,6 @@
 <?php
 
-require_once('config.php');
+require_once('../config/database.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $maestro_id = $_GET['id'];
@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     $stmt->execute([$maestro_id]);
 
     // Redirigir de vuelta a la página de listar_maestros.php 
-    header('Location: listar_maestros.php');
+    header('Location: /admin/listar_maestros.php');
     exit;
 }
 ?>

@@ -2,12 +2,12 @@
 session_start();
 
 // Verificar si el usuario tiene el rol de administrador
-if ($_SESSION['user_rol'] !== 'admin') {
+    if($_SESSION["user_data"]["role_id"] !== 3) {
     header('Location: acceso_denegado.php');
     exit;
 }
 
-require_once('config.php'); // Configuración de la base de datos
+require_once('../config/database.php'); // Configuración de la base de datos
 
 // Procesar el formulario cuando se envía
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
     <h1>Crear Maestro</h1>
     <!-- Formulario para crear un nuevo maestro -->
-    <form action="crear_maestro.php" method="POST">
+    <form action="../admin/crear_maestro.php" method="POST">
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" required><br><br>
 
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
 
     <br>
-    <a href="admin_panel.php">Volver al Panel de Administrador</a>
+    <a href="../admin/admin_panel.php">Volver al Panel de Administrador</a>
 </body>
 
 </html>
