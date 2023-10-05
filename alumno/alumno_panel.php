@@ -1,16 +1,16 @@
 <?php
-session_start();
+// session_start();
 
 // Verificar si el usuario tiene el rol de alumno
-if ($_SESSION['user_rol'] !== 'alumno') {
+if($_SESSION["user_data"]["role_id"] !== 5) {
     header('Location: acceso_denegado.php');
     exit;
 }
 
-require_once('config.php'); // Configuración de la base de datos
+require_once('../config/database.php'); // Configuración de la base de datos
 
 // Obtener la ID del alumno desde la sesión
-$alumno_id = $_SESSION['user_id'];
+$alumno_id = $_SESSION['user_data'];
 
 // Consultar las clases en las que está registrado el alumno
 $stmt = $pdo->prepare("SELECT c.nombre AS clase_nombre FROM clases c

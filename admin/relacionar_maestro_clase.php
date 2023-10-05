@@ -44,3 +44,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <a href="admin_panel.php">Volver al Panel de Administrador</a>
 </body>
 </html>
+

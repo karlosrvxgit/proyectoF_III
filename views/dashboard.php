@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Dashboard crv</h1>
+    <h1>Universidad</h1>
     <?php
     session_start();
     if($_SESSION["user_data"]["role_id"] === 3) {
@@ -14,11 +14,11 @@
         include($_SERVER["DOCUMENT_ROOT"] . "/admin/admin_panel.php");
     }
     if($_SESSION["user_data"]["role_id"] === 4) {
-        echo "<h2>Hola Maestro</h2>";
+        include($_SERVER["DOCUMENT_ROOT"] . "/maestro/maestro_panel.php");
     }
     if($_SESSION["user_data"]["role_id"] === 5) {
-        // echo "<h2>Hola Alumno</h2>";
         include($_SERVER["DOCUMENT_ROOT"] . "/views/alumno/dashboard.php");
+        
     }
 
 ?>;

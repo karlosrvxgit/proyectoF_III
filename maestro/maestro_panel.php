@@ -1,59 +1,70 @@
 <?php
-session_start();
+// session_start();
 
 // Verificar si el usuario tiene el rol de maestro
-if ($_SESSION['user_rol'] !== 'maestro') {
+if($_SESSION["user_data"]["role_id"] !== 4) {
     header('Location: acceso_denegado.php');
     exit;
 }
 
-require_once('config.php'); // Configuración de la base de datos
+require_once('../config/database.php'); // Configuración de la base de datos
 
-// Obtener el nombre de usuario del maestro desde la sesión (o cualquier otro criterio de autenticación)
-$nombre_usuario = $_SESSION['user_nombre_usuario'];
+// Obtener la ID del maestro desde la sesión
+$maestro_id = $_SESSION['user_data'];
 
-// Obtener el ID del maestro basándose en el nombre de usuario
-$stmt = $pdo->prepare("SELECT id FROM maestros WHERE nombre_usuario = ?");
-$stmt->execute([$nombre_usuario]);
-$maestro_id = $stmt->fetchColumn();
-
-// Obtener los datos específicos del maestro desde la base de datos
-$stmt = $pdo->prepare("SELECT maestros.id AS maestro_id, maestros.nombre AS maestro_nombre, clases.nombre AS clase_asignada 
-                      FROM maestros_cursos 
-                      INNER JOIN maestros ON maestros_cursos.id_maestro = maestros.id
-                      INNER JOIN clases ON maestros_cursos.id_curso = clases.id
-                      WHERE maestros.id = ?");
+// Consultar la clase asignada al maestro
+$stmt = $pdo->prepare("SELECT m.materia_nombre AS materia_nombre FROM materias m 
+                       JOIN maestros_cursos mm ON m.id = mm.id_materia
+                       WHERE mm.id_maestro = ?");
 $stmt->execute([$maestro_id]);
-$maestro_info = $stmt->fetch(PDO::FETCH_ASSOC);
+$materia = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Obtener los datos de los alumnos asignados a la clase
-$stmt = $pdo->prepare("SELECT nombre, apellidos FROM alumnos WHERE clase_asignada = ?");
-$stmt->execute([$maestro_info['clase_asignada']]);
-$alumnos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Consultar la lista de alumnos en la clase asignada al maestro
+if ($materia) {
+    $materia_id = $materia['id'];
+    $stmt = $pdo->prepare("SELECT a.nombre AS alumno_nombre FROM alumnos a
+                           JOIN alumnos_clases ac ON a.id = ac.id_alumno
+                           WHERE ac.id_clase = ?");
+    $stmt->execute([$clase_id]);
+    $alumnos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Resto del código de la página de maestro
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Panel de Maestro</title>
 </head>
 <body>
-    <h1>Bienvenido, <?php echo $maestro_info['maestro_nombre']; ?>!</h1>
+    <h1>Bienvenido al Panel de Maestro</h1>
 
-    <!-- Mostrar la clase asignada al maestro -->
-    <h2>Clase Asignada:</h2>
-    <p><?php echo $maestro_info['clase_asignada']; ?></p>
+    <!-- Mostrar la clase asignada -->
+    <h2>Clase Asignada</h2>
+    <?php
+    if ($clase) {
+        echo "<p>Tu clase asignada es: " . $clase['clase_nombre'] . "</p>";
+    } else {
+        echo "<p>No estás asignado a ninguna clase.</p>";
+    }
+    ?>
 
-    <!-- Mostrar los datos de los alumnos -->
-    <h2>Alumnos en la Clase:</h2>
-    <ul>
-        <?php foreach ($alumnos as $alumno) : ?>
-            <li><?php echo $alumno['nombre'] . ' ' . $alumno['apellidos']; ?></li>
-        <?php endforeach; ?>
-    </ul>
+    <!-- Mostrar la lista de alumnos -->
+    <h2>Lista de Alumnos</h2>
+    <?php
+    if ($alumnos) {
+        echo "<ul>";
+        foreach ($alumnos as $alumno) {
+            echo "<li>" . $alumno['alumno_nombre'] . "</li>";
+        }
+        echo "</ul>";
+    } else {
+        echo "<p>No hay alumnos en esta clase.</p>";
+    }
+    ?>
 
     <br>
-    <a href="cerrar_sesion.php">Cerrar Sesión</a>
+    <a href="cerrar_sesion.php">Cerrar sesión</a>
 </body>
 </html>
 

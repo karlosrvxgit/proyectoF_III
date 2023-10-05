@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>Login crv</h1>
+    <h1>Login</h1>
     <div class="flex-initial w-64">
         <img src="/imagenes/logo.jpg" alt="">
     </div>
