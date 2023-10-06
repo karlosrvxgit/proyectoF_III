@@ -1,5 +1,5 @@
 <?php
-// session_start();
+session_start();
 
 // Verificar si el usuario tiene el rol de alumno
 if($_SESSION["user_data"]["role_id"] !== 5) {
@@ -25,9 +25,16 @@ $clases = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <html>
 <head>
     <title>Panel de Alumno</title>
+    <link href="/dist/output.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Bienvenido al Panel de Alumno</h1>
+<body class="bg-gray-800 text-white h-screen w-1/5 p-4">
+<h2 class="text-2xl font-semibold mb-4">Alumno Panel</h2>
+<ul>
+    <li class="mb-2">
+        <label class="hover:text-yellow-400">Clases Registradas</label>
+
+    </li>
+</ul>
 
     <!-- Mostrar las clases en las que está registrado -->
     <h2>Clases Registradas</h2>

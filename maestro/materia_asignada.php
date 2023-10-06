@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 // Verificar si el usuario tiene el rol de maestro
 if (!isset($_SESSION["user_data"]) || $_SESSION["user_data"]["role_id"] !== 4) {
@@ -29,36 +30,14 @@ if ($materia) {
     $alumnos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// Resto del código de la página de maestro
 ?>
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Panel de Maestro</title>
-    <link href="/dist/output.css" rel="stylesheet">
-</head>
-
-<body class="flex h-screen bg-gray-100">
-    <!-- Sidebar -->
-    <div class="bg-gray-800 text-white h-screen w-1/5 p-4">
-        <h2 class="text-2xl font-semibold mb-4">Maestro Panel</h2>
-        <ul>
-            <li class="mb-2">
-                <label class="hover:text-yellow-400">Inicio</label>
-            </li>
-            <li class="mb-2">
-                <label class="hover:text-yellow-400">Materia Asignda</label>
-                <ul class="ml-4 group-hover:block #">
-                    <li class="hover:bg-gray-700 py-2"><a href="/maestro/materia_asignada.php">Materia Asignada</a></li>
-                    <li class="hover:bg-gray-700 py-2"><a href="/maestro/lista_alumnos.php">Listar Alumnos</a></li>
-                </ul>
-            </li>
-        </ul>
-
+<h2>Materia Asignada</h2>
+        <?php
+        if ($materia) {
+            echo "<p>Tu materia asignada es: " . $materia['materia_nombre'] . "</p>";
+        } else {
+            echo "<p>No estás asignado a ninguna materia.</p>";
+        }
+        ?>
         
-        <br>
-        <a href="/login/login.php">Cerrar sesión</a>
-</body>
-
-</html>

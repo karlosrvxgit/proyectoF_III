@@ -25,7 +25,8 @@
         <input type="password" name="contrasena" required><br>
         <input type="submit" value="Registrarse">
     </form>
-    <a href="/login/login.php">Iniciar Sesión</a>
+    <a href="../login/login.php">Iniciar Sesión</a>
+   <?php header("Location: /views/dashboard.php");?>;
     
 </body>
 </html>

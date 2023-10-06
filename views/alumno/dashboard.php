@@ -34,59 +34,43 @@ $stmnt->execute();
 $faltantes = $stmnt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
-<h2>Materias Inscritas</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Materia</th>
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php
-        foreach ($inscritas as $inscrita) {
-        ?>
-            <tr>
-                <td><?= $inscrita['materia_nombre'] ?></td>
-                <td>
-                    <form action="/handle_db/alumno/retirar_materia.php" method="post">
-                        <input type="number" hidden value="<?= $inscrita["materia_id"] ?>" name="materia_id">
-                        <button type="submit">Darse de baja</button>
-                    </form>
-                </td>
-            </tr>
-        <?php
-        }
-        ?>
-    </tbody>
-</table>
 
-<h2>Materias disponibles:</h2>
+<!DOCTYPE html>
+<html lang="en">
 
-<?php
-if (count($faltantes) !== 0) {
-?>
-    <form action="/handle_db/alumno/inscribir_materia.php" method="post">
-        <label>Escoge tus materias</label>
-        <select multiple name="materias[]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumno</title>
+    <link href="/dist/output.css" rel="stylesheet">
+</head>
 
-            <?php
-            foreach ($faltantes as $key => $faltante) {
-            ?>
-                <option value="<?= $faltante["materia_id"] ?>">
-                    <?= $faltante["materia_nombre"] ?>
-                </option>
-            <?php
-            }
-            ?>
-        </select>
-        <button type="submit">Inscribirse</button>
-    </form>
-<?php
-} else {
-    echo "<p>Estás inscrito a todas las materias</p>";
-}
-?>
+<body class="flex h-screen bg-gray-100">
+    <!--Sidebar -->
+    <div class="bg-gray-800 text-white h-screen w-1/5 p-4">
+        <h2 class="text-2xl font-semibold mb-4">Alumno Panel</h2>
+        <ul>
+            <li class="mb-2">
+                <label class="hover:text-yellow-400">Inicio</label>
+            </li>
+            <li class="mb-2">
+                <label class="hover:text-yellow-400">Materias Inscritas</label>
+                <ul class="ml-4 group-hover:block #">
+                    <li class="hover:bg-gray-700 py-2"><a href="/views/alumno/materias_inscritas.php">Materias Inscritas</a></li>
+                </ul>
+            </li>
+            <li class="mb-2">
+                <label class="hover:text-yellow-400">Materias Disponibles</label>
+                <ul class="ml-4 group-hover:block #">
+                    <li class="hover:bg-gray-700 py-2"><a href="/views/alumno/materias_disponibles.php">Materias Disponibles</a></li>
 
+                </ul>
+            </li>
 
+        </ul>
 
+    </div>
+
+</body>
+
+</html>

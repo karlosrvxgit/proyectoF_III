@@ -8,7 +8,7 @@
     <link href="/dist/output.css" rel="stylesheet">
 </head>
 
-<body class="h-100  grid grid-cols-1 gap-4 content-normal">
+<body class="h-screen flex justify-center items-center bg-blue-200">
     <div class="text-5xl font-extrabold ...">
         <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-orange-500">
             Login
