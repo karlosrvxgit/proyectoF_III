@@ -6,7 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Universidad</h1>
     <?php
     session_start();
     if($_SESSION["user_data"]["role_id"] === 3) {
