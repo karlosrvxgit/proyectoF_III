@@ -58,7 +58,7 @@ if ($materia) {
 
         
         <br>
-        <a href="/login/login.php">Cerrar sesión</a>
+        <a href="/cerrar_sesion.php">Cerrar sesión</a>
 </body>
 
 </html>

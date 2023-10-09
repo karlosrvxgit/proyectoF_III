@@ -57,6 +57,6 @@ if (
     }
 } else {
     // Si no se enviaron datos de registro, muestra un mensaje de error
-    echo "Se requieren datos de registro. <a href='/register/register.php'>Volver a intentar</a>";
+    echo "Se requieren datos de registro. <a href='/cerrar_sesion.php'>Volver a intentar</a>";
 }
 ?>

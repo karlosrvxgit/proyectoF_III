@@ -68,9 +68,9 @@ $faltantes = $stmnt->fetchAll(PDO::FETCH_ASSOC);
             </li>
 
         </ul>
-
+        <a href="/cerrar_sesion.php">Cerrar Sesión</a>
     </div>
-
+    
 </body>
 
 </html>

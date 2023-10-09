@@ -36,7 +36,7 @@
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-blue-500 py-2 px-4 rounded">Registrarse</button>
         </form>
 
-        <p class="mt-4"><a href="/login/login.php" class="text-blue-500 hover:underline">Iniciar Sesión</a></p>
+        <p class="mt-4"><a href="/cerrar_sesion.php" class="text-blue-500 hover:underline">Iniciar Sesión</a></p>
     </div>
     
 </body>

@@ -20,6 +20,7 @@ $maestros = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <head>
     <title>Listar Maestros</title>
+    
 </head>
 
 <body>

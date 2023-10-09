@@ -47,7 +47,7 @@
                 <a href="·" class="hover:text-yellow-400">Cambio de Rol de Usuario</a>
                 <ul class="ml-4 group-hover:block #">
                     <li class="hover:bg-gray-700 py-2"><a href="/admin/cambio_rol_usuario.php">Cambio de Rol de Usuario</a></li>
-                    <li class="hover:bg-gray-700 py-2"><a href="../cerrar_sesion.php">cerrar_sesion</a></li>
+                    <li class="hover:bg-gray-700 py-2"><a href="/cerrar_sesion.php">cerrar_sesion</a></li>
 
                 </ul>
             </li>

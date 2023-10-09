@@ -77,7 +77,7 @@ $clases = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
     <br>
-    <a href="cerrar_sesion.php">Cerrar sesión</a>
+    <a href="/cerrar_sesion.php">Cerrar sesión</a>
 </body>
 </html>
 
