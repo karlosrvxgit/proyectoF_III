@@ -8,19 +8,23 @@
 <body>
     <?php
     session_start();
-    if($_SESSION["user_data"]["role_id"] === 3) {
 
-        include($_SERVER["DOCUMENT_ROOT"] . "/admin/admin_panel.php");
-    }
-    if($_SESSION["user_data"]["role_id"] === 4) {
-        include($_SERVER["DOCUMENT_ROOT"] . "/maestro/maestro_panel.php");
-    }
-    if($_SESSION["user_data"]["role_id"] === 5) {
-        include($_SERVER["DOCUMENT_ROOT"] . "/views/alumno/dashboard.php");
-        
-    }
+    if(isset($_SESSION["user_data"])) {
+        $role_id = $_SESSION["user_data"]["role_id"];
 
-?>;
-    
+        if($role_id === 3) {
+            include($_SERVER["DOCUMENT_ROOT"] . "/admin/admin_panel.php");
+        } elseif($role_id === 4) {
+            include($_SERVER["DOCUMENT_ROOT"] . "/maestro/maestro_panel.php");
+        } elseif($role_id === 5) {
+            include($_SERVER["DOCUMENT_ROOT"] . "/views/alumno/dashboard.php");
+        } else {
+            echo "No tienes permisos para acceder a esta página.";
+        }
+    } else {
+        echo "Debes iniciar sesión primero.";
+       
+    }
+    ?>
 </body>
 </html>

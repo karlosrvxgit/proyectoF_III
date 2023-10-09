@@ -42,7 +42,7 @@ if (
             $_SESSION['user_email'] = $email;
 
             // Redirige al usuario a la página de inicio de sesión
-            header('Location: ../login/login.php');
+            header('Location: /login/login.php');
             exit();
         } else {
             // Error al registrar al usuario, muestra un mensaje de error

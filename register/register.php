@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+    
 <h1>Registrarse</h1>
     <!-- Formulario de registro -->
     <form action="/register/register_process.php" method="post">
@@ -25,8 +26,8 @@
         <input type="password" name="contrasena" required><br>
         <input type="submit" value="Registrarse">
     </form>
-    <a href="../login/login.php">Iniciar Sesión</a>
-   <?php header("Location: /views/dashboard.php");?>;
+    <a href="/login/login.php">Iniciar Sesión</a>
+   
     
 </body>
 </html>
