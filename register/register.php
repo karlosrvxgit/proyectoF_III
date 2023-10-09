@@ -4,30 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="/dist/output.css" rel="stylesheet">
 </head>
-<body>
-    
-<h1>Registrarse</h1>
-    <!-- Formulario de registro -->
-    <form action="/register/register_process.php" method="post">
+<body class="bg-gray-100 h-screen flex justify-center items-center">
 
-        <label for="name">Nombre:</label>
-        <input type="text" name="name" required><br>
+    <div class="bg-white p-8 rounded shadow-lg max-w-md">
+        <h1 class="text-2xl font-bold mb-4 bg-blue-500">Registrarse</h1>
+        <!-- Formulario de registro -->
+        <form action="/register/register_process.php" method="post">
 
-        <label for="rol">Rol:</label>
-        <input type="rol" name="rol" required><br>
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-600">Nombre:</label>
+                <input type="text" name="name" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
 
-        <label for="correo">Correo:</label>
-        <input type="email" name="correo" required><br>
+            <div class="mb-4">
+                <label for="rol" class="block text-sm font-medium text-gray-600">Rol:</label>
+                <input type="text" name="rol" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
 
+            <div class="mb-4">
+                <label for="correo" class="block text-sm font-medium text-gray-600">Correo:</label>
+                <input type="email" name="correo" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" name="contrasena" required><br>
-        <input type="submit" value="Registrarse">
-    </form>
-    <a href="/login/login.php">Iniciar Sesión</a>
-   
+            <div class="mb-4">
+                <label for="contrasena" class="block text-sm font-medium text-gray-600">Contraseña:</label>
+                <input type="password" name="contrasena" required class="mt-1 p-2 w-full border rounded-md">
+            </div>
+
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-blue-500 py-2 px-4 rounded">Registrarse</button>
+        </form>
+
+        <p class="mt-4"><a href="/login/login.php" class="text-blue-500 hover:underline">Iniciar Sesión</a></p>
+    </div>
     
 </body>
 </html>
